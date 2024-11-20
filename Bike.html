@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XYZ Bike Showroom</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        /* Header Styling */
+        header {
+            background-color: #f8b400;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        /* Layout for brand and model display */
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        /* Sidebar (Bike Brands) Styling */
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #444;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar a:hover {
+            background-color: #555;
+        }
+        /* Main content area for bike models */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #f4f4f4;
+            overflow-y: auto;
+        }
+        .bike-model {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #f8b400;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8b400;
+            color: white;
+        }
+        /* Default message styling */
+        .welcome-message {
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+    <script>
+        // JavaScript to handle changing models based on brand selection
+        function loadModels(brand) {
+            let content = '';
+
+            if (brand === 'brand1') {
+                content = `
+                    <div class="bike-model">
+                        <h2>Brand 1 - Model 1</h2>
+                        <table>
+                            <tr><th>Specification</th><th>Details</th></tr>
+                            <tr><td>Engine</td><td>250cc</td></tr>
+                            <tr><td>Fuel Capacity</td><td>15 liters</td></tr>
+                            <tr><td>Price</td><td>$5,000</td></tr>
+                        </table>
+                    </div>
+                    <div class="bike-model">
+                        <h2>Brand 1 - Model 2</h2>
+                        <table>
+                            <tr><th>Specification</th><th>Details</th></tr>
+                            <tr><td>Engine</td><td>400cc</td></tr>
+                            <tr><td>Fuel Capacity</td><td>20 liters</td></tr>
+                            <tr><td>Price</td><td>$7,000</td></tr>
+                        </table>
+                    </div>`;
+            } else if (brand === 'brand2') {
+                content = `
+                    <div class="bike-model">
+                        <h2>Brand 2 - Model 1</h2>
+                        <table>
+                            <tr><th>Specification</th><th>Details</th></tr>
+                            <tr><td>Engine</td><td>150cc</td></tr>
+                            <tr><td>Fuel Capacity</td><td>12 liters</td></tr>
+                            <tr><td>Price</td><td>$3,500</td></tr>
+                        </table>
+                    </div>
+                    <div class="bike-model">
+                        <h2>Brand 2 - Model 2</h2>
+                        <table>
+                            <tr><th>Specification</th><th>Details</th></tr>
+                            <tr><td>Engine</td><td>300cc</td></tr>
+                            <tr><td>Fuel Capacity</td><td>18 liters</td></tr>
+                            <tr><td>Price</td><td>$6,200</td></tr>
+                        </table>
+                    </div>`;
+            } else {
+                content = '<div class="welcome-message"><h2>Select a bike brand to view models and specifications.</h2></div>';
+            }
+
+            document.getElementById('mainContent').innerHTML = content;
+        }
+    </script>
+</head>
+<body onload="loadModels('')">
+    <header>
+        Welcome to XYZ Bike Showroom
+    </header>
+    <div class="container">
+        <div class="sidebar">
+            <a href="#" onclick="loadModels('brand1')">Brand 1</a>
+            <a href="#" onclick="loadModels('brand2')">Brand 2</a>
+            <a href="#" onclick="loadModels('')">Brand 3 (No Data)</a>
+            <a href="#" onclick="loadModels('')">Brand 4 (No Data)</a>
+        </div>
+        <div id="mainContent" class="main-content">
+            <div class="welcome-message">
+                <h2>Select a bike brand to view models and specifications.</h2>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
