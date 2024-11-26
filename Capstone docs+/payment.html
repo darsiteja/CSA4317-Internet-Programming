@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: orange;
+        }
+        form {
+            margin-top: 30px;
+            display: inline-block;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        select, input {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+        .payment-details {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function showPaymentFields() {
+            const paymentMethod = document.getElementById("payment-method").value;
+            const creditCardFields = document.getElementById("credit-card-fields");
+            const upiFields = document.getElementById("upi-fields");
+            const netBankingFields = document.getElementById("net-banking-fields");
+
+            // Hide all fields initially
+            creditCardFields.style.display = "none";
+            upiFields.style.display = "none";
+            netBankingFields.style.display = "none";
+
+            // Show relevant fields based on selected payment method
+            if (paymentMethod === "credit-card") {
+                creditCardFields.style.display = "block";
+            } else if (paymentMethod === "upi") {
+                upiFields.style.display = "block";
+            } else if (paymentMethod === "net-banking") {
+                netBankingFields.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Payment Process</h1>
+    <p>Please select your payment method and provide the required details.</p>
+    <form action="success.html" method="POST">
+        <label for="payment-method">Payment Method:</label>
+        <select id="payment-method" name="payment-method" onchange="showPaymentFields()" required>
+            <option value="" disabled selected>Select Payment Method</option>
+            <option value="credit-card">Credit Card</option>
+            <option value="upi">UPI</option>
+            <option value="net-banking">Net Banking</option>
+        </select>
+
+        <!-- Credit Card Fields -->
+        <div id="credit-card-fields" class="payment-details" style="display: none;">
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" name="card-number">
+            
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+            
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv">
+        </div>
+
+        <!-- UPI Fields -->
+        <div id="upi-fields" class="payment-details" style="display: none;">
+            <label for="upi-id">UPI ID:</label>
+            <input type="text" id="upi-id" name="upi-id" placeholder="example@bank">
+        </div>
+
+        <!-- Net Banking Fields -->
+        <div id="net-banking-fields" class="payment-details" style="display: none;">
+            <label for="bank-name">Bank Name:</label>
+            <select id="bank-name" name="bank-name">
+                <option value="" disabled selected>Select Your Bank</option>
+                <option value="hdfc">HDFC Bank</option>
+                <option value="icici">ICICI Bank</option>
+                <option value="sbi">State Bank of India</option>
+                <option value="axis">Axis Bank</option>
+            </select>
+            
+            <label for="account-number">Account Number:</label>
+            <input type="text" id="account-number" name="account-number">
+        </div>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>
