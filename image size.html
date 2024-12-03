@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Size Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    img {
+      margin-top: 20px;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Image Size Viewer</h1>
+  <p>Enter the URL of an image below to find its dimensions:</p>
+  <input type="text" id="imageUrl" placeholder="Enter image URL" size="50">
+  <button id="getImageSize">Get Image Size</button>
+  <div id="output" style="margin-top: 20px;"></div>
+  <script>
+    document.getElementById('getImageSize').addEventListener('click', () => {
+      const imageUrl = document.getElementById('imageUrl').value;
+      const output = document.getElementById('output');
+      if (!imageUrl) {
+        output.innerHTML = '<p style="color: red;">Please enter a valid image URL.</p>';
+        return;
+      }
+      const img = new Image();
+      img.src = imageUrl;
+      // When the image loads, display its dimensions
+      img.onload = function () {
+        output.innerHTML = `
+          <p>Image Dimensions:</p>
+          <p><strong>Width:</strong> ${this.width}px</p>
+          <p><strong>Height:</strong> ${this.height}px</p>
+          <p>Preview:</p>
+          <img src="${imageUrl}" alt="Image Preview">
+        `;
+      };
+      // Handle image loading errors
+      img.onerror = function () {
+        output.innerHTML = '<p style="color: red;">Failed to load the image. Please check the URL.</p>';
+      };
+    });
+  </script>
+</body>
+</html>
